@@ -1,0 +1,24 @@
+// Alternar Tema (Claro / Escuro)
+const themeToggle = document.getElementById('theme-toggle');
+const htmlElement = document.documentElement;
+
+themeToggle.addEventListener('click', () => {
+  const currentTheme = htmlElement.getAttribute('data-theme');
+  const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  htmlElement.setAttribute('data-theme', nextTheme);
+  themeToggle.textContent = nextTheme === 'dark' ? '☀️' : '🌙';
+});
+
+// Alternar Idioma (PT / EN)
+const langToggle = document.getElementById('lang-toggle');
+let currentLang = 'pt';
+
+langToggle.addEventListener('click', () => {
+  currentLang = currentLang === 'pt' ? 'en' : 'pt';
+  langToggle.textContent = currentLang === 'pt' ? 'EN' : 'PT';
+  document.documentElement.lang = currentLang === 'pt' ? 'pt-BR' : 'en';
+
+  document.querySelectorAll('[data-pt]').forEach((el) => {
+    el.textContent = el.getAttribute(`data-${currentLang}`);
+  });
+});
